@@ -26,6 +26,6 @@ jobs:
         git config --local user.name "GitHub Action"
         git add Config/DefaultGame.ini
         git commit -m "Update ProjectVersion to $PR_NUMBER"
-        git push HEAD:${{github.head_ref}}
+        git push origin HEAD:${{github.head_ref}}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

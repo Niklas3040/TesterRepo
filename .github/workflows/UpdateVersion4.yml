@@ -12,12 +12,6 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
-    - name: Check out the branch
-      run: git checkout ${{ github.head_ref }}
-
-    - name: Pull latest changes from the branch
-      run: git pull origin ${{ github.head_ref }}
-
     - name: Set PR number
       run: echo "PR_NUMBER=${{ github.event.pull_request.number }}" >> $GITHUB_ENV
 

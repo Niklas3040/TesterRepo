@@ -23,7 +23,7 @@ jobs:
     - name: Commit changes
       run: |
         git fetch origin HEAD:${{github.head_ref}}
-        git pull origin HEAD:${{github.head_ref}}
+        git pull --no-rebase origin HEAD:${{github.head_ref}}
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git add Config/DefaultGame.ini

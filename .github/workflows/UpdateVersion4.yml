@@ -22,8 +22,8 @@ jobs:
 
     - name: Commit changes
       run: |
-        git config --local user.email "niklas.longen@gmail.com"
-        git config --local user.name "Niklas3040"
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
         git add Config/DefaultGame.ini
         git commit -m "Update ProjectVersion to $PR_NUMBER"
         git push origin HEAD:${{github.head_ref}}

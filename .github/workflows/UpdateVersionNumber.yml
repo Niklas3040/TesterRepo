@@ -1,4 +1,4 @@
-name: Update Project-Version 
+name: Update Project-Version in ProjectVersion.ini
 
 on:
   pull_request:
@@ -17,16 +17,16 @@ jobs:
     - name: Set PR number
       run: echo "PR_NUMBER=${{ github.event.pull_request.number }}" >> $GITHUB_ENV
 
-    - name: Update ProjectVersion in DefaultGame.ini
+    - name: Update ProjectVersion in ProjectVersion.ini
       run: |
-        FILE="Config/DefaultGame.ini"
-         sed -i "s/^\(ProjectVersion=[0-9]\+\.[0-9]\+\.[0-9]\+\.\)[0-9]\+/\1${PR_NUMBER}/" $FILE
+        FILE="Config/ProjectVersion.ini"
+        echo "${PR_NUMBER}" > $FILE
 
     - name: Commit changes
       run: |
         git config user.email "action@github.com"
         git config user.name "GitHub Action"
-        git add Config/DefaultGame.ini
+        git add Config/ProjectVersion.ini
         git commit -m "Update ProjectVersion to $PR_NUMBER"
         git push origin HEAD:${{github.head_ref}}
       env:

@@ -12,20 +12,20 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
       with:
-        path: ${{github.head_ref}}
+        ref: ${{ github.head_ref }}
 
     - name: Set PR number
       run: echo "PR_NUMBER=${{ github.event.pull_request.number }}" >> $GITHUB_ENV
 
     - name: Update ProjectVersion in DefaultGame.ini
       run: |
-        FILE="${{github.head_ref}}/Config/DefaultGame.ini"
+        FILE="Config/DefaultGame.ini"
         sed -i "s/^ProjectVersion=.*/ProjectVersion=${PR_NUMBER}/" $FILE
 
     - name: Commit changes
       run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
+        git config user.email "action@github.com"
+        git config user.name "GitHub Action"
         git add Config/DefaultGame.ini
         git commit -m "Update ProjectVersion to $PR_NUMBER"
         git push origin HEAD:${{github.head_ref}}

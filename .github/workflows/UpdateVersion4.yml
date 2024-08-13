@@ -20,7 +20,7 @@ jobs:
     - name: Update ProjectVersion in DefaultGame.ini
       run: |
         FILE="Config/DefaultGame.ini"
-        sed -i "s/^ProjectVersion=.*/ProjectVersion=${PR_NUMBER}/" $FILE
+         sed -i "s/^\(ProjectVersion=[0-9]\+\.[0-9]\+\.[0-9]\+\.\)[0-9]\+/\1${PR_NUMBER}/" $FILE
 
     - name: Commit changes
       run: |

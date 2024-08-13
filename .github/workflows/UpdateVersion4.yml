@@ -22,7 +22,7 @@ jobs:
 
     - name: Commit changes
       run: |
-        git checkout ${{github.head_ref}}
+        git switch -c ${{github.head_ref}} origin/${{github.head_ref}}
         git fetch origin HEAD:${{github.head_ref}}
         git pull --no-rebase origin HEAD:${{github.head_ref}}
         git config --local user.email "action@github.com"

@@ -11,6 +11,8 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
+      with:
+        path: ${{github.head_ref}}
 
     - name: Set PR number
       run: echo "PR_NUMBER=${{ github.event.pull_request.number }}" >> $GITHUB_ENV
@@ -22,9 +24,6 @@ jobs:
 
     - name: Commit changes
       run: |
-        git switch -c ${{github.head_ref}} origin/${{github.head_ref}}
-        git fetch origin HEAD:${{github.head_ref}}
-        git pull --no-rebase origin HEAD:${{github.head_ref}}
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git add Config/DefaultGame.ini

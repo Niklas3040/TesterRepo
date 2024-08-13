@@ -11,13 +11,15 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
+      with:
+        path: ${{github.head_ref}}
 
     - name: Set PR number
       run: echo "PR_NUMBER=${{ github.event.pull_request.number }}" >> $GITHUB_ENV
 
     - name: Update ProjectVersion in DefaultGame.ini
       run: |
-        FILE="Config/DefaultGame.ini"
+        FILE="${{github.head_ref}}/Config/DefaultGame.ini"
         sed -i "s/^ProjectVersion=.*/ProjectVersion=${PR_NUMBER}/" $FILE
 
     - name: Commit changes
